@@ -68,6 +68,9 @@ fn main() {
             Err(err) => println!("err {:#?}", err),
         }
 
+        // 1.b. create a new branch pointing to the SHA from 1.b.
+        //      More details: https://gist.github.com/potherca/3964930
+
         // 2. create a new content updating the file with the new code
         //    https://developer.github.com/v3/repos/contents/
         // 3. create a new PR
