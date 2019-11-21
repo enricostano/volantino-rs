@@ -2,12 +2,14 @@ extern crate clap;
 extern crate hubcaps;
 extern crate reqwest;
 extern crate select;
+extern crate url;
 extern crate futures;
 extern crate tokio;
 
 use hubcaps::{Credentials, Github, git::GetReferenceResponse::Exact, git::GetReferenceResponse::StartWith};
 use select::document::Document;
 use select::predicate::Name;
+use url::Url;
 use futures::{Future, Stream};
 
 fn fetch_codes() -> impl Future<Item=(), Error=()> {
@@ -43,8 +45,11 @@ fn volantino_code_from(document: Document) -> String {
     let iframe = document.find(Name("iframe")).next().unwrap();
     // println!("IFRAME: {:?}", iframe);
     let src = iframe.attr("src").unwrap();
+    let src_url = Url::parse(&["data:", &src].concat()).unwrap();
+    let (_param_key, param_value) = src_url.query_pairs().find(|(x,_y)| x == "d").unwrap();
+    println!("SRC_URL: {:?}", param_value);
 
-    src.rsplit("/").next().unwrap().to_string()
+    return param_value.to_string()
 }
 
 // {
