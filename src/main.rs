@@ -64,16 +64,16 @@ fn volantino_code_from(document: Document) -> String {
 //     },
 //     Err(err) => println!("err {:#?}", err),
 // }
-fn get_branch_ref() -> impl Future<Item=hubcaps::git::GetReferenceResponse, Error=hubcaps::Error> {
-    let github = Github::new(
-        "my-cool-user-agent/0.1.0",
-        Credentials::Token(api_token.to_string()),
-    );
-    github
-        .repo("enricostano", "stanosas")
-        .git()
-        .reference("heads/gh-pages")
-}
+// fn get_branch_ref() -> impl Future<Item=hubcaps::git::GetReferenceResponse, Error=hubcaps::Error> {
+//     let github = Github::new(
+//         "my-cool-user-agent/0.1.0",
+//         Credentials::Token(api_token.to_string()),
+//     );
+//     github
+//         .repo("enricostano", "stanosas")
+//         .git()
+//         .reference("heads/gh-pages")
+// }
 
 // 1. create a new branch from gh-pages
 // 1.a. get gh-pages branch's SHA
